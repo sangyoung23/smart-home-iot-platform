@@ -1,0 +1,101 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.smarthome'
+version = '0.0.1-SNAPSHOT'
+description = 'Smart Home IoT Platform using Kafka, Redis, MongoDB, MySQL'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+tasks.withType(Test).configureEach {
+	failOnNoDiscoveredTests = false
+}
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// ===========================================
+	// 🔹 Spring Boot 기본 Web, Validation
+	// ===========================================
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+	// ===========================================
+	// 🔹 Security + JWT 인증
+	// ===========================================
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// ===========================================
+	// 🔹 MySQL + JPA
+	// ===========================================
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// ===========================================
+	// 🔹 MongoDB (센서 로그 저장)
+	// ===========================================
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	// ===========================================
+	// 🔹 Redis
+	// ===========================================
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// ===========================================
+	// 🔹 Kafka (IoT Sensor Stream 처리)
+	// ===========================================
+	implementation 'org.springframework.kafka:spring-kafka'
+
+	// ===========================================
+	// 🔹 Jackson Core Modules
+	// ===========================================
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	implementation 'com.fasterxml.jackson.core:jackson-core'
+
+	// ===========================================
+	// 🔹 Lombok
+	// ===========================================
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// ===========================================
+	// 🔹 Batch
+	// ===========================================
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.batch:spring-batch-test'
+
+	// ===========================================
+	// 🔹 Dev Tools (개발 환경 자동 리로드)
+	// ===========================================
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// ===========================================
+	// 🔹 Test
+	// ===========================================
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+

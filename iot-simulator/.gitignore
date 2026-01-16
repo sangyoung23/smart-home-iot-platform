@@ -1,0 +1,71 @@
+### 기본 ###
+HELP.md
+*.log
+*.tmp
+
+### Java ###
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+### Gradle ###
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+### IntelliJ IDEA ###
+.idea/
+artifacts/
+*.iws
+*.iml
+*.ipr
+
+# JetBrains 자동 생성 metadata
+workspace.xml
+tasks.xml
+modules.xml
+misc.xml
+vcs.xml
+compiler.xml
+gradle.xml
+
+### Eclipse / STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### 운영체제 ###
+.DS_Store
+Thumbs.db
+
+### 로그 & 임시파일 ###
+*.log
+*.error
+*.out
+
+### Docker ###
+/docker-volume/
+/docker-data/
