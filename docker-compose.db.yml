@@ -1,0 +1,89 @@
+services:
+  # =========================
+  # MySQL
+  # =========================
+  mysql:
+    image: mysql:8.0
+    container_name: smart-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: smart_home
+      TZ: Asia/Seoul
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - smart-home-iot-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -uroot -proot1234 || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+
+  # =========================
+  # Redis
+  # =========================
+  redis:
+    image: redis:7.0
+    container_name: smart-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - smart-home-iot-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # =========================
+  # MongoDB
+  # =========================
+  mongodb:
+    image: mongo:6.0
+    container_name: smart-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root1234
+      MONGO_INITDB_DATABASE: smart_home
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - smart-home-iot-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mongosh",
+          "--username",
+          "root",
+          "--password",
+          "root1234",
+          "--authenticationDatabase",
+          "admin",
+          "--eval",
+          "db.adminCommand('ping')",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
+  mongo_data:
+
+networks:
+  smart-home-iot-network:
+    name: smart-home-iot-network
+    driver: bridge

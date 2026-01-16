@@ -1,0 +1,19 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smart-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/logs:/app/logs
+    env_file:
+      - ./backend/.env.local
+    restart: unless-stopped
+    networks:
+      - smart-home-iot-network
+
+networks:
+  smart-home-iot-network:
+    external: true

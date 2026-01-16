@@ -1,0 +1,16 @@
+services:
+  simulator:
+    build:
+      context: ./iot-simulator
+      dockerfile: Dockerfile
+    container_name: smart-simulator
+    ports:
+      - "8081:8081"
+    networks:
+      - smart-home-iot-network
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+networks:
+  smart-home-iot-network:
+    external: true
