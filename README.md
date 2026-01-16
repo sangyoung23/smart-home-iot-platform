@@ -1,4 +1,5 @@
 # Smart Home IoT Platform – Docker Environment
+<img width="2087" height="1255" alt="스마트 홈 IoT 시스템 구성도" src="https://github.com/user-attachments/assets/5eb96fa4-1e58-46aa-a659-47b52e5993bf" />
 
 본 저장소는 **스마트 홈 IoT 실시간 모니터링 시스템**을  
 로컬 환경에서 **실제 운영 환경과 유사하게 실행하기 위한 Docker Compose 구성 레포지토리**입니다.
